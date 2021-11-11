@@ -1,5 +1,6 @@
 // This file contains the game logic.
 // All the event-listening should happen in buttons.js
+const greenGameControl = document.getElementById('green-game-control');
 const keys = {
     blue: {
         tag: document.getElementById('blue'),
@@ -21,7 +22,7 @@ const keys = {
 
 const keyNums = ['blue', 'green', 'red', 'yellow'];
 
-const sequence = [0,3,2,3,1,0,2];
+const sequence = [];
 let index = 0;
 const gameButtons = document.getElementsByClassName('game-button');
 
@@ -31,21 +32,38 @@ for (let i = 0; i < gameButtons.length; i++) {
     })
 };
 
-const timer = setInterval(() => {
-    
+
+
+const round = () => {
     for (let value of Object.values(keys)) {
         value.tag.removeAttribute('style');
     }
-    const currentKey = keys[keyNums[sequence[index]]];
-    
-    currentKey.sound.play();
-    currentKey.tag.style.animation = '1s light-up';
-    index++;
+    index = 0;
+    const random = Math.floor(Math.random() * 4);
+    sequence.push(random);
 
-    if (index === sequence.length) {
-        clearInterval(timer);
+    const timer = setInterval(() => {
+    
         for (let value of Object.values(keys)) {
-            value.tag.disabled = false;
-        }   
-    }
-}, 1000);
+            value.tag.removeAttribute('style');
+        }
+        const currentKey = keys[keyNums[sequence[index]]];
+        
+        currentKey.sound.play();
+        currentKey.tag.style.animation = '1s light-up';
+        index++;
+    
+        if (index === sequence.length) {
+            clearInterval(timer);
+            for (let value of Object.values(keys)) {
+                value.tag.disabled = false;
+            }   
+        }
+    }, 1000);
+}
+
+greenGameControl.addEventListener('click', () => {
+    // const startTimer = () => round();
+    round();
+    // startTimer();
+})
