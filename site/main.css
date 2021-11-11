@@ -4,8 +4,12 @@
 }
 html {
   background-color: #FCFCFC;
-  font-family: Arial;
+  font-family: 'Irish Grover', cursive;
   font-size: 18px;
+}
+
+h1 {
+  text-align: center;
 }
 
 #content {
@@ -13,9 +17,9 @@ html {
   margin: 0 auto;
 }
 
-.game-button:active {
+/* .game-button:active {
   opacity: .5;
-}
+} */
 
 body {
   display: flex;
