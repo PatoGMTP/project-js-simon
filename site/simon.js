@@ -32,7 +32,6 @@ let playing = false;
 let yourTurn = false;
 let timerIndex = 0;
 
-
 greenGameControl.addEventListener('click', () => {
     gameOver.innerHTML = '';
     if (!playing) {
@@ -59,7 +58,6 @@ const playerListener = (event) => {
         event.target.style.animation = '1s light-up';
         userSequence.push(keyNums.indexOf(event.target.id));
         userSequence.forEach((num, i) => {
-            console.log([num, sequence[i]]);
             num === sequence[i] ? '' : endGame()
         });
         if (correct && sequence.length === userSequence.length) {
@@ -79,7 +77,7 @@ const runTimer = () => {
     timerIndex = 0;
     
     const timer = setInterval(() => {
-        if (timerIndex % 2) {
+        if (timerIndex % 2 === 0) {
             removeAnimation();
         } else {
             if (index === sequence.length) {
@@ -94,7 +92,7 @@ const runTimer = () => {
 
         }
         timerIndex++;
-    }, 500);
+    }, 600);
 
     yourTurn = true;
 }
