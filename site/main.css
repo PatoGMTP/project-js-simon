@@ -13,46 +13,34 @@ html {
   margin: 0 auto;
 }
 
-#content h1 {
-  font-size: 3rem;
-  text-align: center;
+.game-button:active {
+  opacity: .5;
 }
 
-.simon-container {
-  margin: 20px auto;
-  width:400px;
-  height:400px;
-  background-color:#fff;
-  display:grid;
-  grid-template-columns: 200px 200px;
-  grid-row: auto auto;
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
-}
-
-.simon-container .simon-button {
-  align-items: center;
-  background-color: #333;
-  border-radius: 10px;
-  color: #fff;
-  padding: 20px;
+body {
+  display: flex;
   justify-content: center;
-  font-size: 40px;
-  font-family: sans-serif;
+  align-items: center;
+  height: 800px;
 }
 
-.simon-button.green {
-  background-color: #21BA45;
+svg {
+  width: 500px;
 }
 
-.simon-button.red {
-  background-color: #DB2828;
+.game-button, .control-button {
+  cursor: pointer;
 }
 
-.simon-button.yellow {
-  background-color: #FBBD08;
+.control-button:hover {
+  opacity: .5;
 }
 
-.simon-button.blue {
-  background-color: #2185D0;
+@keyframes light-up {
+  0% {
+      opacity: .5;
+  }
+  100% {
+      opacity: 1;
+  }
 }
