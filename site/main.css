@@ -8,8 +8,12 @@ html {
   font-size: 18px;
 }
 
-h1 {
+h1, p {
   text-align: center;
+}
+
+p {
+  font-size: 26px;
 }
 
 #content {
@@ -17,9 +21,9 @@ h1 {
   margin: 0 auto;
 }
 
-/* .game-button:active {
+.game-button:active {
   opacity: .5;
-} */
+}
 
 body {
   display: flex;
