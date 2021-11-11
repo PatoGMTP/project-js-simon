@@ -1,5 +1,3 @@
-// This file contains the game logic.
-// All the event-listening should happen in buttons.js
 const greenGameControl = document.getElementById('green-game-control');
 const redGameControl = document.getElementById('red-game-control');
 const gameOver = document.getElementById('game-over');
@@ -8,19 +6,19 @@ const gameButtons = document.getElementsByClassName('game-button');
 const keys = {
     blue: {
         tag: document.getElementById('blue'),
-        sound: new Audio('./sounds/blue.mp3'),    
+        sound: new Audio('./site/sounds/blue.mp3'),    
     },
     green: { 
         tag: document.getElementById('green'),
-        sound: new Audio('./sounds/green.mp3'),
+        sound: new Audio('./site/sounds/green.mp3'),
     },
     red: {
         tag: document.getElementById('red'),
-        sound: new Audio('./sounds/red.mp3'),
+        sound: new Audio('./site/sounds/red.mp3'),
     },
     yellow: {
         tag: document.getElementById('yellow'),
-        sound: new Audio('./sounds/yellow.mp3')
+        sound: new Audio('./site/sounds/yellow.mp3')
     }
 }
 
@@ -46,7 +44,12 @@ greenGameControl.addEventListener('click', () => {
 
 redGameControl.addEventListener('click', () => {
     gameOver.innerHTML = '';
+    sequence = [];
+    userSequence = [];
+    index = 0;
+    correct = true;
     playing = false;
+    yourTurn = false;
 })
 
 
@@ -73,6 +76,7 @@ const playerTurn = () => {
 
 const runTimer = () => {
     yourTurn = false;
+    timerIndex = 0;
     
     const timer = setInterval(() => {
         if (timerIndex % 2) {
@@ -121,7 +125,7 @@ const round = () => {
 }
 
 const endGame = () => {
-    const gameOverAudio = new Audio('./sounds/wrong-buzzer.mp3');
+    const gameOverAudio = new Audio('./site/sounds/wrong-buzzer.mp3');
     gameOverAudio.play();
     gameOver.innerHTML = `You guessed incorrectly.  You made it to round ${index + 1}`;
     sequence = [];
