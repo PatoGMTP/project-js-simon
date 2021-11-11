@@ -23,25 +23,30 @@ const keys = {
 const keyNums = ['blue', 'green', 'red', 'yellow'];
 
 const sequence = [];
+let userSequence = [];
 let index = 0;
+let correct = true;
 const gameButtons = document.getElementsByClassName('game-button');
 
-for (let i = 0; i < gameButtons.length; i++) {
-    gameButtons[i].addEventListener('click', (event) => {
-        keys[event.target.id].sound.play();
-    })
-};
+// for (let i = 0; i < gameButtons.length; i++) {
+//     gameButtons[i].addEventListener('click', (event) => {
+//         keys[event.target.id].sound.play();
+//         userSequence.push(keyNums.indexOf(event.target.id));
+//         console.log(userSequence);
+//     })
+// };
 
-
-
-const round = () => {
-    for (let value of Object.values(keys)) {
-        value.tag.removeAttribute('style');
+const playerListener = (event) => {
+    keys[event.target.id].sound.play();
+    userSequence.push(keyNums.indexOf(event.target.id));
+    console.log(userSequence);
+    userSequence.forEach((num, i) => num === sequence[i] ? '' : correct = false);
+    if (userSequence.length === sequence.length) {
+        round();
     }
-    index = 0;
-    const random = Math.floor(Math.random() * 4);
-    sequence.push(random);
+}
 
+const runTimer = () => {
     const timer = setInterval(() => {
     
         for (let value of Object.values(keys)) {
@@ -57,9 +62,33 @@ const round = () => {
             clearInterval(timer);
             for (let value of Object.values(keys)) {
                 value.tag.disabled = false;
-            }   
+            }  
         }
     }, 1000);
+}
+
+function playerTurn () {
+    for (let i = 0; i < gameButtons.length; i++) {
+        gameButtons[i].addEventListener('click', playerListener)
+    };
+}
+
+
+const round = () => {
+    userSequence = [];
+    for (let i = 0; i < gameButtons.length; i++) {
+        gameButtons[i].removeEventListener('click', playerListener);
+    }
+    for (let value of Object.values(keys)) {
+        value.tag.removeAttribute('style');
+    }
+    index = 0;
+    const random = Math.floor(Math.random() * 4);
+    sequence.push(random);
+    console.log(sequence);
+    runTimer();
+    playerTurn();
+
 }
 
 greenGameControl.addEventListener('click', () => {
